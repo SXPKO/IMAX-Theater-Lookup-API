@@ -1,0 +1,1 @@
+  SELECT * FROM imax_theaters;

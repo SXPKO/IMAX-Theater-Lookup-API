@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMAX Theater Lookup API</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!--CSS Styles for the API Key purchase site.-->
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, #000428, #0066ff); 
+    color: white;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 25px;
+    margin: 0 auto;
+    max-width: 1000px;
+    gap: 24px;
+}
+
+.imaxHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imaxHeaderContainer a, 
+.buttonUpdate,
+.keyAdded {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    background: hsla(200, 80%, 50%, 0.4);
+    border: none;
+    gap: 8px;
+    font-size: 0.8rem;
+}
+
+.buttonUpdate,
+.keyAdded {
+    margin-top: 10px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.imaxHeaderContainer a:hover,
+.buttonUpdate:hover,
+.keyAdded:hover {
+    background: hsla(200, 80%, 50%, 0.6);
+}
+
+.container {
+    display: flex;
+}
+
+.secondHeader {
+    font-size: 1.3rem;
+}
+
+.descriptionContainer {
+    gap: 8px;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+}
+
+.descriptionContainer h3,
+.descriptionContainer p {
+    font-size: 0.5rem;
+}
+
+.descriptionContainer h3 {
+    color: green;
+    font-weight: 500;
+}
+
+.descriptionContainer p {
+    font-weight: 300;
+}
+
+.descriptionContainer i {
+    cursor: pointer;
+}
+
+.descriptionContainer i:hover {
+    opacity: 0.6;
+}
+
+.errorMessage {
+    color: red;
+    opacity: unset;
+    display: none;
+}
+
+.authMessage {
+    color: green;
+    opacity: unset;
+    display: none;
+}   
+
+#api_cancel_button {
+    background: darksalmon;
+    display: none;
+}
+
+#api_cancel_button:hover {
+    background: lightsalmon;
+}
+
+.codeCheck {
+    padding: 0 8px;
+}
+
+.apiKeyEnter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 8px;
+    gap: 8px;
+    border: 1 px solid darkblue;
+}
+
+.apiKeyEnter:focus-within {
+    border-color:  blue;
+}
+
+.apiKeyEnter input {
+    color: white;
+    outline: none;
+    border: none;
+    background: transparent;
+    padding: 10px;
+    flex: 1;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.keyHeader {
+    padding-top: 16px;
+}
+
+.keyInfo {
+    padding-top: 20px;
+}
+
+.planningContainer {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.apiSub {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: hsla(200, 80%, 50%, 0.2);
+    border-radius: 5px;
+    padding: 12px;
+}
+
+
+.a {
+    color: #cc00cc;
+}
+
+.keyStatusUpdate {
+    margin-top: 4px;
+}
+
+form button {
+    all: unset;
+}
+
+.billingHeader {
+    display: flex;
+    align-items: center;
+    padding-top: 25px;
+    justify-content: space-between;
+}
+
+.billingHeader div {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.activeSub,
+.activeSub2 {
+    padding: 4px 10px;
+    display: flex;
+    border-radius: 20px;
+    background: green;
+    align-items: center;
+    gap: 4px;
+}
+
+.activeSub2 {
+    background: rgb(11, 170, 162);
+}
+
+.activeSub p,
+.activeSub2 p,
+.activeSub i,
+.activeSub2 i {
+    font-size: 0.8rem;
+}
+
+.activeSub p,
+.activeSub i {
+    text-shadow: 0 0 16px green;
+}
+
+.activeSub2 p,
+.activeSub2 i {
+    text-shadow: 0 0 16px cyan;
+}
+
+.currentBill {
+    color: green;
+}
+
+.currentBill2 {
+    color: darkCyan;
+}
+
+.subDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.costInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.costInfo h4 {
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.costInfo p {
+    font-weight: 800;
+}
+
+.costInfo i {
+    color: green;
+    background: #000428;
+    padding: 2px 4px;
+}
+
+.paymentBlock {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+@media (min-width: 700px) {
+        .container {
+            gap: 32px;
+        }
+
+        .imaxHeaderContainer a {
+            font-size: 1rem;
+        }
+
+        .secondHeader {
+            font-size: 1.8rem;
+        }
+
+        .descriptionContainer {
+            gap: 16px;
+        }
+
+        .descriptionContainer h3,
+        .descriptionContainer p {
+            font-size: 1rem;
+        }
+
+        .apiSub {
+            padding: 24px;
+        }
+
+        .currentBill {
+            font-size: 1.2rem;
+        }
+
+        .costInfo h4  {
+            font-size: 1rem;
+        }
+
+        .costInfo p  {
+            font-size: 0.9rem;
+        }
+
+        .codeCheck {
+            padding: 0 10px;
+        }
+
+        .planningContainer {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+ }
+
+</style>
+
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="imaxHeaderContainer">
+    <header>
+        <h1>IMAX Theater Lookup API</h1>
+        <!--Link to Github Gist which has the documentation for the project.-->
+        <a class="beginning" href="https://gist.github.com/0451hthack/840d7a06fae7dcb61ee301484e2655f3">
+            <i class="fa-solid fa-book-open"></i>
+            Documentation
+        </a>
+    </header>
+</div>
+    <main>
+        <section>
+            <h2 class="secondHeader">Description</h2>
+            <div class="descriptionContainer">
+                <h3>Purpose of API</h3>
+            <p>The LFExaminer site is out of publication and no longer updates its
+                database of IMAX theaters or other premium large format theaters. This API offers a solution. 
+                The theater lookup contains every single prior entry, and endpoint calls can be used to add new theaters
+                or provide updates to existing ones! This will allow a more current and complete profile of IMAX theaters 
+                around the world, with a plethora of details for each location.<span></span>
+            </p>
+                <span></span>
+                <p>
+                In addition, you can use this API to look up IMAX theaters all over the world by using endpoints to search
+                through various criteria. You can search for a specific theater by its name or ID. 
+            And if you wanted to lookup all 1.43:1 locations that offer both 15/70 film projection and GT Laser(DL2), there's
+            an endpoint to search for theaters by their format. Other search options include: Country, City, State, Large Format 
+            Type(Could be other brands such as Barco), the number of seats, 2D/3D projection capability, Flat/Dome screens, and
+        the Opening Date. 
+                </p>
+        <span></span>
+        <p>
+                One particularly handy feature is the use of the ChatGPT API. Using the data obtained from the returned DB rows,
+            ChatGPT provides a description for that particular theater, detailing an overview that sums up all that locations
+            attributes and what might make it a standout IMAX experience. This is valuable for somebody who may be eyeing a specific
+            location wanting to know more about it. All of this is possible via my Lookup API. Enjoy!</p>
+        </p>
+        </div>
+        <div class="repoLink">
+            <h3>Author</h3>
+            <p>Harrison Thacker</p>
+            <span></span>
+            <span></span>
+        <!--Link to Github profile.-->
+            <a href="https://github.com/0451hthack">GitHub Profile</a>
+        <span></span>
+        </div>
+        </section>
+
+        <section>
+            <span></span>
+            <h2 class="keyHeader">API Key Status</h2>
+            <p class="keyStatus">Enter your key down below to check its status.</p>
+            <p class="errorMessage">Please make sure you formatted your API Key correctly.</p>
+            <p class="authMessage">Your API Key is authenticated.</p>
+            <div class="keyInfo">
+                <h3>API Key Example</h3>
+                <p>914FB65L8234124396GD511M15834S87</p>
+            </div>
+
+            <!--Input field for the user to enter their API Key for verification.-->
+            <div class="apiKeyEnter">
+                <input id="usersKey" type="text" placeholder="Enter your API Key.">
+                <i class="fa-regular fa-circle" keyCheck></i>
+                <i class="fa-solid fa-circle" keyCheck></i>
+            </div>
+            
+            <div id="api_status_button" class="keyAdded">
+                <i class="fa-solid fa-check"></i> Check API Key Status
+            </div>
+            <p class="keyStatusUpdate"></p>
+            <!--Cancellation button that appears when a user successfully verifies a subscription plan API Key.-->
+            <div id="api_cancel_button" class="keyAdded">
+                <i class="fa-solid fa-x"></i> Cancel Subscription
+            </div>
+        </section>
+
+        <!--Section for both the prepaid and subscription plans.-->
+        <section>
+            <h2 class="billingHeader">API Billing</h2>
+            <div class="planningContainer">
+                <!--Form that redirects to the Stripe Prepaid Checkout endpoint when clicked.-->
+            <form action="create-checkout-session/prepaid" method="POST" class="apiSub">
+                    <div>
+                        <h3 class="currentBill">API Prepaid</h3>
+                        <h3>Plan</h3>
+                    </div>    
+
+                    <div class="activeSub">
+                        <i class="fa-regular fa-square-check"></i>
+                        <p>Active Prepaid Plan</p>
+                    </div>
+                
+
+
+                <div class="subscriptionInfo">
+                    <div class="subDetails">
+                        <h4>Payment Plan Details</h4>
+                        <p>
+                            <i class="fa-solid fa-check"></i>
+                            100 IMAX API Calls
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-check"></i>
+                            Available For Frequent Use
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-check"></i>
+                            Option To Pay In Advance
+                        </p>
+                    </div>
+
+                    <div class="costInfo">
+                        <h4>Payment Plan Cost</h4>
+                        <div class="paymentBlock">
+                            <p>Price</p>
+                            <p>$7.50</p>
+                        </div>
+                        <div class="paymentBlock">
+                            <p>Billing Period</p>
+                            <p>N/A</p>
+                        </div>
+                        <div class="paymentBlock">
+                            <p>Date Of Renewal:</p>
+                            <p>N/A</p>
+                        </div>
+                    </div>
+                </div>
+
+            <button class="buttonUpdate">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Checkout
+            </button>
+        </form>
+
+        <!--Form that redirects to Stripe Subscription Plan Checkout.-->
+    <form action="create-checkout-session/sub" method="POST" class="apiSub">
+    <div>
+        <h3 class="currentBill2">API Subscription</h3>
+        <h3>Plan</h3>
+    </div>    
+
+    <div class="activeSub2">
+        <i class="fa-regular fa-square-check"></i>
+        <p>Active Subscription Plan</p>
+    </div>
+
+<div class="subscriptionInfo">
+    <div class="subDetails">
+        <h4>Subscription Plan Details</h4>
+        <p>
+            <i class="fa-solid fa-check"></i>
+            Unlimited IMAX API Calls
+        </p>
+        <p>
+            <i class="fa-solid fa-check"></i>
+            Payment Per The Stripe Usage Response Generation
+        </p>
+        <p>
+            <i class="fa-solid fa-check"></i>
+            Option To Pay In Advance
+        </p>
+    </div>
+
+    <div class="costInfo">
+        <h4>Subscription Plan Cost</h4>
+        <div class="paymentBlock">
+            <p>Price</p>
+            <p>$1.00/Call</p>
+        </div>
+        <div class="paymentBlock">
+        <p>Billing Period</p>
+        <p>Monthly</p>
+        </div>
+
+        <div class="paymentBlock">
+            <p>Date of Renewal:</p>
+            <p>First Of Each Month</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="buttonUpdate">
+    <i class="fa-solid fa-cart-shopping"></i>
+    Checkout
+    </button>
+</form>
+   </section>
+
+    </main>
+    <footer>
+        <p>&copy; 2025 IMAX Theater Lookup API</p>
+    </footer>
+    <!--Scripts that obtain current API Key status, and logic to cancel a subscription.-->
+    <script>
+
+        const errorMessage = document.querySelector('.errorMessage')
+        const authMessage = document.querySelector('.authMessage')
+        const keyStatusUpdate = document.querySelector('.keyStatusUpdate')
+        const api_cancel_button = document.getElementById('api_cancel_button')
+        const userInput = document.getElementById('usersKey')
+        const api_status_button = document.getElementById('api_status_button')
+
+        //Function that retrieves the API Key input from the user, and verifies its status.
+        async function getCurrentStatus() {
+            const users_api_key = userInput.value
+            if(!users_api_key) {
+                return
+            }
+            try {
+                const res = await fetch('http://localhost:3006/check_status?api_key=' + users_api_key)
+                const { status } = await res.json()
+                console.log('Status of API Key Is: ', status)
+                if(status === "This API Key doesn't exist.")
+                {
+                    errorMessage.innerText = status
+                    errorMessage.style.display = 'inline'
+                    return
+                }
+                authMessage.style.display = 'inline'
+                if(!status) {
+                    console.log('Status of API Key Is Null.')
+                    keyStatusUpdate.innerHTML = 
+                    (`<div class="keyInfo">
+                    <h3>Status of Subscription</h3>
+                    <p>Inactive</p>
+                    </div>`)
+                }
+
+                else if(status === 'subscription') {
+                    keyStatusUpdate.innerHTML = 
+                    (`<div class="keyInfo">
+                    <h3>Status of Subscription</h3>
+                    <p>Active</p>
+                    </div>`)
+                    api_cancel_button.style.display = 'flex'
+                }
+
+                else{
+                    keyStatusUpdate.innerHTML = 
+                    (`<div class="keyInfo">
+                    <h3># Of API Calls Remaining </h3>
+                    <p>${status}</p> 
+                    </div>`)
+                }
+            }
+            catch (err) {
+                console.log(err.msg)
+            }
+        }
+
+        //Function that cancels a subscription plan.
+        async function subscriptionCancellation() {
+        const users_api_key = userInput.value
+        if (!users_api_key) {
+            return
+        }
+        try {
+            const res = await fetch('http://localhost:3006/delete?api_key=' + users_api_key)
+            keyStatusUpdate.innerHTML = (
+                `<div class="keyInfo">
+                        <h3>Status Of Subscription</h3>
+                        <p>Cancelled</p>
+                    </div>`
+            )
+        } catch (err) {
+            console.log(err.msg)
+        }
+    }
+        //EventListeners for the respective API verification and subscription cancellation buttons.
+        api_status_button.addEventListener('click', getCurrentStatus)
+        api_cancel_button.addEventListener('click', subscriptionCancellation)
+
+    </script> 
+</div>
+</body>
+</html>

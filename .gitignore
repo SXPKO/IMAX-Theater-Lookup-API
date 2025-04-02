@@ -1,0 +1,6 @@
+.env
+credentials.json
+node_modules
+request_logs.txt
+users.sql
+logs

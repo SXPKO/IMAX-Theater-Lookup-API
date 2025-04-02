@@ -1,0 +1,22 @@
+version: "3.3"
+services:    
+  db:
+    image: postgres:14-bullseye
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+  app:
+    image: imax-theater-lookup-api
+    ports:
+     - 14000:3006      
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
