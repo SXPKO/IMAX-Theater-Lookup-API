@@ -1,12 +1,15 @@
-const {initializeApp, cert} = require('firebase-admin/app')
-const { getFirestore } = require('firebase-admin/firestore')
+const admin = require('firebase-admin');
+const dotenv = require('dotenv');
 
-let serviceAccount = require('./credentials.json')
+dotenv.config();
 
-initializeApp({
-    credential: cert(serviceAccount)
-})
+const firebaseCredentials = JSON.parse(process.env.FIREBASE_CREDENTIALS);
 
-const db = getFirestore()
+admin.initializeApp({
+    credential: admin.credential.cert(firebaseCredentials),
+    databaseURL: `https://${firebaseCredentials.project_id}.firebaseio.com`,
+});
 
-module.exports = { db }
+const db = admin.firestore();
+
+module.exports = { db };
