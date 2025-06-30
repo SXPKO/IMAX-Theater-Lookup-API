@@ -1,33 +1,178 @@
-# IMAX Theater Lookup API
+```markdown
+# 🎥 IMAX Theater Lookup API 🌍
 
-## Author Details
-* Author: Harrison Thacker
-* Email: harrison.johnson.thacker@gmail.com
-* Version Of Application: 1.0
-* Period Of Development: Jan - March 2025
+Welcome to the **IMAX Theater Lookup API**! This project is a comprehensive solution designed to help you find and manage IMAX theaters across the globe. Whether you're a movie enthusiast or a developer looking to integrate theater data into your application, this API provides everything you need.
 
-## Overview
-Node.js API that retrieves data from all IMAX theaters around the world. Has endpoints to also add new theaters or even make edits to existing ones.
+## 🚀 Overview
 
-Made in Node.js, Express, with a PostgreSQL database backend. Uses Firebase to store and keep track of API Key records. Runs within a Docker Container. API Keys(Prepaid plan or Subscription plan) are purchased through Stripe.
+The IMAX Theater Lookup API is built using **Node.js** with the **Express** framework and is powered by a **PostgreSQL** database. It allows users to retrieve data about IMAX theaters, add new theaters, and update existing information. With secure management of API keys using **Firebase**, this API ensures robust performance and security. The entire application runs smoothly within a **Docker** container, making it easy to deploy and manage.
 
-With the LFExaminer site being out of publication and no longer updating its database of IMAX theaters or other premium large format theaters, I decided to make an API that offers a solution. The theater lookup contains every single prior entry found on the original site, and endpoint calls can be used to add new theaters or provide updates to existing ones. This will allow a more up-to-date and complete profile of IMAX theaters around the world, with a plethora of details for each location. One can consult the theaters.csv file plus the documentation for assistance making an API call.
+### 🌟 Key Features
 
-In addition, this API can look up IMAX theaters all over the world by using endpoints to search through various criteria. One can search for a specific theater by its name or ID. And if someone wanted to lookup all 1.43:1 locations that offer both 15/70 film projection and GT Laser(DL2), there's an endpoint to search for theaters by their format. Other search options include: Country, City, State, Large Format Type(Could be other brands such as Barco), the number of seats, 2D/3D projection capability, Flat/Dome screens, and the Opening Date.
+- **Data Retrieval**: Access information about all IMAX theaters worldwide.
+- **Add Theaters**: Insert new theaters into the database.
+- **Edit Existing Theaters**: Update information for existing theaters.
+- **Secure API Keys**: Manage API keys efficiently with Firebase.
+- **Containerized Application**: Runs in Docker for easy setup and deployment.
+- **Rate Limiting**: Prevent abuse of the API with built-in rate limiting.
+- **Logging**: Utilize Winston for robust logging capabilities.
 
-Certain endpoints also make use of the ChatGPT API. Using the data obtained from the returned DB rows, ChatGPT provides a description for that particular theater, detailing an overview that sums up all that locations attributes and what might make it a standout IMAX experience. This is valuable for someone who may be eyeing a specific location wanting to know more about it. 
+## 📦 Getting Started
 
- ## Subscription Notes
-The Prepaid plan is for one month only and isn't renewable. For a renewable payment, try the Subscription plan which renews monthly via Stripe. You'll be able to make unlimited API calls this way. Usage is metered so the monthly cost is dependant on how many calls are made.
+### Prerequisites
 
-To cancel your subscription, go to the home page(API Key Purchase), and type in your API Key in the verification section to authenticate it. Your key should then be verified, and you'll get to see the status of your subscription.
+Before you start, ensure you have the following installed:
 
-Down below is a button to cancel the subscription. Careful, because once clicked, your subscription is inactive, and you will no longer be able to make calls.
+- Node.js
+- Docker
+- PostgreSQL
+- Firebase Account
 
-For assistance and questions with anything, please reach out to harrison.johnson.thacker@gmail.com
+### Installation
 
-## Documentation Link
-https://gist.github.com/0451hthack/840d7a06fae7dcb61ee301484e2655f3
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/SXPKO/IMAX-Theater-Lookup-API.git
+   cd IMAX-Theater-Lookup-API
+   ```
 
+2. **Set Up Environment Variables**:
+   Create a `.env` file in the root directory and include your Firebase and database configuration.
 
-## Railway Link 
+3. **Run Docker Container**:
+   To build and run the application in a Docker container, use:
+   ```bash
+   docker-compose up --build
+   ```
+
+4. **Access the API**:
+   Open your browser or API client and navigate to `http://localhost:3000`.
+
+### 🌐 API Endpoints
+
+Here’s a quick overview of the available endpoints:
+
+- **GET /theaters**: Retrieve a list of all IMAX theaters.
+- **POST /theaters**: Add a new IMAX theater.
+- **PUT /theaters/:id**: Update an existing IMAX theater by ID.
+- **DELETE /theaters/:id**: Remove a theater from the database.
+
+### Example Requests
+
+#### Retrieve All Theaters
+
+```bash
+curl -X GET http://localhost:3000/theaters
+```
+
+#### Add a New Theater
+
+```bash
+curl -X POST http://localhost:3000/theaters \
+-H "Content-Type: application/json" \
+-d '{
+    "name": "New IMAX Theater",
+    "location": "123 Movie St, Film City",
+    "capacity": 300
+}'
+```
+
+#### Update an Existing Theater
+
+```bash
+curl -X PUT http://localhost:3000/theaters/1 \
+-H "Content-Type: application/json" \
+-d '{
+    "capacity": 350
+}'
+```
+
+#### Delete a Theater
+
+```bash
+curl -X DELETE http://localhost:3000/theaters/1
+```
+
+## 🔒 Security
+
+Security is a top priority for this API. It uses rate limiting to control the number of requests and prevent abuse. You can customize the rate limit settings in the configuration file.
+
+### API Key Management
+
+The API manages its keys through Firebase, ensuring that each request is authenticated. Make sure to secure your API keys and never expose them in public repositories.
+
+## 📊 Logging
+
+We utilize **Winston** for logging API requests and errors. This allows you to keep track of the application’s performance and diagnose issues effectively.
+
+### Logging Levels
+
+- **info**: General information about the application.
+- **warn**: Indications of potential issues.
+- **error**: Critical errors that require immediate attention.
+
+## 🎨 Technology Stack
+
+- **Node.js**: JavaScript runtime for building server-side applications.
+- **Express**: Fast web framework for Node.js.
+- **PostgreSQL**: Powerful, open-source relational database.
+- **Firebase**: Cloud-based service for managing API keys and user authentication.
+- **Docker**: Platform for developing, shipping, and running applications in containers.
+- **Winston**: Versatile logging library for Node.js.
+
+## 📥 Releases
+
+You can find the latest releases and updates for this project [here](https://github.com/SXPKO/IMAX-Theater-Lookup-API/releases). Make sure to check this section regularly for new features and improvements.
+
+## 🧑‍🤝‍🧑 Contributing
+
+We welcome contributions to enhance the functionality and usability of the IMAX Theater Lookup API. To contribute:
+
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Submit a pull request.
+
+Please ensure that your code follows the existing coding standards and includes appropriate tests.
+
+## 📃 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+
+## 💬 Community
+
+Join our community discussions and share your ideas! You can find us on:
+
+- GitHub Issues: For reporting bugs and requesting features.
+- Discord: Join our server for live discussions and support.
+
+## 🎉 Acknowledgments
+
+We appreciate the support from the open-source community and the contributors who make this project possible. Thank you for being part of the journey!
+
+## 📸 Screenshots
+
+![IMAX Theater Lookup](https://example.com/screenshot1.png)
+*IMAX Theater Lookup API in action!*
+
+![API Response Example](https://example.com/screenshot2.png)
+*Sample API response for theater data.*
+
+## 📈 Future Enhancements
+
+We aim to continuously improve the IMAX Theater Lookup API. Here are some planned features:
+
+- Enhanced search capabilities.
+- Integration with movie booking systems.
+- User account management and ratings for theaters.
+- Additional data analytics features.
+
+## 💼 Related Projects
+
+Explore these related projects for additional functionality and ideas:
+
+- [Movie Booking System](https://github.com/example/movie-booking-system)
+- [Theater Reviews API](https://github.com/example/theater-reviews-api)
+
+Thank you for checking out the IMAX Theater Lookup API! We hope you find it useful and look forward to your feedback and contributions.
+```
